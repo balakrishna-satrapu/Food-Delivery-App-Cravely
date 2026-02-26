@@ -10,12 +10,10 @@
 /* <div id="parent">
     <p id="tagline">Feed your Cravings</p>
 </div> */
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-const parent = React.createElement(
-  "div",
-  { id: "parent" },
-  React.createElement("p", { id: "tagline" }, "Feed your Cravings"),
-);
+const parent = <div id="parent"><h1 id="tagline">Feed your Cravings</h1></div>;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

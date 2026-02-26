@@ -1,0 +1,25 @@
+{
+  "name": "food-delivery-app-cravely",
+  "version": "1.0.0",
+  "description": "Cravely is a frontend food delivery web application built using React",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balakrishna-satrapu/Food-Delivery-App-Cravely.git"
+  },
+  "author": "Satrapu Balakrishna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/balakrishna-satrapu/Food-Delivery-App-Cravely/issues"
+  },
+  "homepage": "https://github.com/balakrishna-satrapu/Food-Delivery-App-Cravely#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}
