@@ -68,8 +68,7 @@
     width: 260px;
     height: 30px;
 }
-
-.search-button {
+.search-container > button {
     height: 30px;
     padding: 0px 10px;
     margin-left: 10px;

@@ -25,6 +25,12 @@ const Body = () => {
           className="search-button">
           Search
         </button>
+        <button 
+          onClick={() => {
+            setResList(restaurants.filter( restaurant => restaurant.info.avgRating > 4.3));
+          }}>
+          Top Rated Restaurants
+        </button>
       </div>
       <div className="restaurant-container">
         {resList.map( restaurant => (
