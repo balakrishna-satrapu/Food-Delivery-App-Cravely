@@ -3,3 +3,6 @@ export const LOGO_URL =
 
 export const CDN_URL = 
     "https://media-assets.swiggy.com/swiggy/image/upload/";
+
+export const API_URL = 
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9698196&lng=77.7499721&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
