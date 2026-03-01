@@ -1,11 +1,13 @@
-const Header = (props) => {
+import { LOGO_URL } from "../utlis/constants";
+
+const Header = () => {
   return (
     <div className="header">
       <div className="logo-container">
         <img
           className="logo"
           alt="logo"
-          src={ props.logo }
+          src={ LOGO_URL }
         />
       </div>
       <div className="nav-items">
