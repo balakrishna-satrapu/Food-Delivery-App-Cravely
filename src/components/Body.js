@@ -3,15 +3,15 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { API_URL, CDN_URL } from "../utlis/constants";
 import { Link } from "react-router-dom";
+import { json } from "../utlis/mockData";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [resList, setResList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  
 
-  const fetchData = async () => {
-    const data = await fetch(API_URL);
-    const json = await data.json();
+  const fetchData = () => {
     setRestaurants(json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setResList(json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
@@ -54,13 +54,14 @@ const Body = () => {
       </div>
       <div className="restaurant-container">
         {resList.map( restaurant => (
-          <Link key={restaurant.info.id} to="/restaurantMenu">
+          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
             <RestaurantCard
               image={CDN_URL + restaurant.info.cloudinaryImageId}
               name={restaurant.info.name}
               cuisines={restaurant.info.cuisines.join(", ")}
               rating={restaurant.info.avgRating}
               deliveryTime={restaurant.info.sla.deliveryTime}
+              id={restaurant.info.id}
             />
           </Link>
         ))}
