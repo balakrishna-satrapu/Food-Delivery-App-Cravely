@@ -18,19 +18,19 @@ const RestaurantMenuCard = () => {
       ?.card?.categories[0]?.itemCards;
 
   return (
-    <div className="restaurant-menu-container">
-      <h1>{name}</h1>
-      <h3>
+    <div className="flex flex-col items-center my-5">
+      <h1 className="font-medium text-3xl">{name}</h1>
+      <h3 className="mt-2">
         {avgRating} stars - {totalRatings}
       </h3>
-      <h3>{cuisines.join(", ")}</h3>
-      <h3>{sla.deliveryTime} minutes</h3>
-      <h2>Menu</h2>
-      <ul className="menu-items-list">
+      <h3 className="mt-2">{cuisines.join(", ")}</h3>
+      <h3 className="mt-2">{sla.deliveryTime} minutes</h3>
+      <h2 className="my-5 font-medium text-2xl">Menu</h2>
+      <ul className="flex flex-col gap-3">
         {itemCards.map((item) => {
           return (
-            <li key={item?.card?.info?.id} className="menu-item">
-              <div className="menu-item-content">
+            <li key={item?.card?.info?.id} className="w-2xl flex p-4 gap-5 justify-between border border-solid border-grey-400">
+              <div className="w-md">
                 <h4>{item?.card?.info?.name}</h4>
                 <h4>₹{item?.card?.info?.price / 100}</h4>
                 <h4>
@@ -42,13 +42,14 @@ const RestaurantMenuCard = () => {
                 </h4>
                 <p>{item?.card?.info?.description}</p>
               </div>
-              <div className="menu-item-image">
+              <div>
                 <img
                   src={
                     "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,e_grayscale,c_fit/" +
                     item?.card?.info?.imageId
                   }
                   alt={item?.card?.info?.name}
+                  className="w-38 h-30 object-cover"
                 ></img>
               </div>
             </li>

@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="header">
-      <div className="logo-container">
+    <div className="flex shadow-md justify-between items-center">
+      <div>
         <img
-          className="logo"
+          className="w-20 "
           alt="logo"
           src={ LOGO_URL }
         />
       </div>
-      <div className="nav-items">
-        <ul>
+      <div>
+        <ul className="flex gap-4 mr-8">
           <li>
             <Link to="/">Home</Link>
           </li>

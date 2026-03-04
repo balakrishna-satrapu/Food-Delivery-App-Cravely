@@ -24,37 +24,40 @@ const Body = () => {
   if(isOnline === false) return <h1>Poor internet Connection 🙁! please check your internet connection</h1>;
 
   return (restaurants.length === 0) ? <Shimmer /> : (
-    <div className="body-container">
-      <div className="search-container">
+    <div className="">
+      <div className="flex gap-4 ml-32 my-8 ">
         <input
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
           type="text"
+          className="h-8 w-56 p-2 border border-solid border-gray-400"
           id="search-input"
           value={searchText}
         />
         <button onClick={() => {
             setResList(restaurants.filter( res => res.info.name.toLowerCase().includes(searchText.toLowerCase())));
           }}
-          className="search-button">
+          className="px-3 bg-gray-200 rounded-md">
           Search
         </button>
-        <button 
+        <button
           onClick={() => {
             setResList(restaurants.filter( restaurant => restaurant.info.avgRating > 4.0));
-          }}>
+          }}
+          className="px-3 bg-gray-200 rounded-md">
           Top Rated Restaurants
         </button>
         <button 
           onClick={() => {
             setResList(restaurants);
             setSearchText("");
-          }}>
+          }}
+          className="px-3 bg-gray-200 rounded-md">
           Remove Filter
         </button>
       </div>
-      <div className="restaurant-container">
+      <div className="mb-6 flex flex-wrap gap-5 justify-center">
         {resList.map( restaurant => (
           <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
             <RestaurantCard
