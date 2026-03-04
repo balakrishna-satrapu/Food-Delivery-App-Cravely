@@ -1,9 +1,9 @@
-import { restaurantsMenu } from "../utlis/restaurantsMenu";
+import { restaurantsMenu } from "../utils/restaurantsMenu";
 import { useParams } from "react-router-dom";
 
 const RestaurantMenuCard = () => {
   const { resId } = useParams();
-
+  
   const resObj = "res" + resId;
 
   const menu = restaurantsMenu[resObj];
