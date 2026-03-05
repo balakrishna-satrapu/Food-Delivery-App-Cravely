@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { restaurantsMenu } from "../utils/restaurantsMenu";
 import { useParams } from "react-router-dom";
+import MenuCategoryList from "./MenuCategoryList";
 
 const RestaurantMenuCard = () => {
+  const [showContent, setShowContent] = useState(false);
   const { resId } = useParams();
-  
+
   const resObj = "res" + resId;
 
   const menu = restaurantsMenu[resObj];
@@ -11,51 +14,59 @@ const RestaurantMenuCard = () => {
   const { name, id, avgRating, cuisines, sla, totalRatings } =
     menu.data?.cards[2]?.card?.card?.info;
 
-  const itemCards =
+  const cards =
     menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card
-      ?.card?.itemCards ||
+      ?.card ||
     menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card
-      ?.card?.categories[0]?.itemCards;
+      ?.card?.categories[0];
+
+  const handleClick = () => {
+    setShowContent(!showContent);
+  };
 
   return (
     <div className="flex flex-col items-center my-5">
       <h1 className="font-medium text-3xl">{name}</h1>
       <h3 className="mt-2">
-        {avgRating} stars - {totalRatings}
+        {avgRating} stars ({totalRatings})
       </h3>
       <h3 className="mt-2">{cuisines.join(", ")}</h3>
       <h3 className="mt-2">{sla.deliveryTime} minutes</h3>
       <h2 className="my-5 font-medium text-2xl">Menu</h2>
-      <ul className="flex flex-col gap-3">
-        {itemCards.map((item) => {
-          return (
-            <li key={item?.card?.info?.id} className="w-2xl flex p-4 gap-5 justify-between border border-solid border-grey-400">
-              <div className="w-md">
-                <h4>{item?.card?.info?.name}</h4>
-                <h4>₹{item?.card?.info?.price / 100}</h4>
-                <h4>
-                  {item?.card?.info?.ratings.aggregatedRating.rating} -{" "}
-                  {
-                    itemCards[0]?.card?.info?.ratings.aggregatedRating
-                      .ratingCount
-                  }
-                </h4>
-                <p>{item?.card?.info?.description}</p>
-              </div>
-              <div>
-                <img
-                  src={
-                    "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,e_grayscale,c_fit/" +
-                    item?.card?.info?.imageId
-                  }
-                  alt={item?.card?.info?.name}
-                  className="w-38 h-30 object-cover"
-                ></img>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="w-6/12 bg-gray-100 p-4 border-b-12 border-gray-200 ">
+        <div
+          className="flex justify-between cursor-pointer"
+          onClick={handleClick}
+        >
+          <p className="font-medium">{cards.title}</p>
+          <div>
+            {showContent ? (
+            // Up Arrow
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeWidth="2" d="M5 15l7-7 7 7" />
+            </svg>
+          ) : (
+            // Down Arrow
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          )}
+          </div>
+        </div>
+        {showContent && <MenuCategoryList itemCards={cards?.itemCards} />}
+      </div>
     </div>
   );
 };

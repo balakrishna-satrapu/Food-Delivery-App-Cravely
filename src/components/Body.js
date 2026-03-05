@@ -21,7 +21,7 @@ const Body = () => {
     fetchData();
   }, []);
 
-  if(isOnline === false) return <h1>Poor internet Connection 🙁! please check your internet connection</h1>;
+  if(isOnline === false) return <h1>Poor internet 🙁! please check your internet connection</h1>;
 
   return (restaurants.length === 0) ? <Shimmer /> : (
     <div className="">
@@ -43,7 +43,7 @@ const Body = () => {
         </button>
         <button
           onClick={() => {
-            setResList(restaurants.filter( restaurant => restaurant.info.avgRating > 4.0));
+            setResList(restaurants.filter( restaurant => restaurant.info.avgRating > 4.5));
           }}
           className="px-3 bg-gray-200 rounded-md">
           Top Rated Restaurants
