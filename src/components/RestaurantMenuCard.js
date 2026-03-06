@@ -14,11 +14,19 @@ const RestaurantMenuCard = () => {
   const { name, id, avgRating, cuisines, sla, totalRatings } =
     menu.data?.cards[2]?.card?.card?.info;
 
-  const cards =
+  const card =
     menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card
-      ?.card ||
-    menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card
-      ?.card?.categories[0];
+      ?.card;
+  
+  let title;
+  let itemCards;
+  if(card?.itemCards) {
+    title = card?.title;
+    itemCards = card?.itemCards;
+  } else {
+    title = card?.categories[0]?.title;
+    itemCards = card?.categories[0]?.itemCards;
+  }
 
   const handleClick = () => {
     setShowContent(!showContent);
@@ -33,12 +41,14 @@ const RestaurantMenuCard = () => {
       <h3 className="mt-2">{cuisines.join(", ")}</h3>
       <h3 className="mt-2">{sla.deliveryTime} minutes</h3>
       <h2 className="my-5 font-medium text-2xl">Menu</h2>
+
+
       <div className="w-6/12 bg-gray-100 p-4 border-b-12 border-gray-200 ">
         <div
           className="flex justify-between cursor-pointer"
           onClick={handleClick}
         >
-          <p className="font-medium">{cards.title}</p>
+          <p className="font-medium">{title}</p>
           <div>
             {showContent ? (
             // Up Arrow
@@ -65,7 +75,7 @@ const RestaurantMenuCard = () => {
           )}
           </div>
         </div>
-        {showContent && <MenuCategoryList itemCards={cards?.itemCards} />}
+        {showContent && <MenuCategoryList itemCards={itemCards} />}
       </div>
     </div>
   );

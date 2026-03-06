@@ -43,7 +43,7 @@ const Body = () => {
         </button>
         <button
           onClick={() => {
-            setResList(restaurants.filter( restaurant => restaurant.info.avgRating > 4.5));
+            setResList(restaurants.filter( restaurant => restaurant.info.avgRating >= 4.5));
           }}
           className="px-3 bg-gray-200 rounded-md">
           Top Rated Restaurants
