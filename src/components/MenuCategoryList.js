@@ -16,12 +16,15 @@ const MenuCategoryList = (props) => {
                 </h4>
                 <p className="text-[13px] mt-2 text-gray-700">{item?.card?.info?.description}</p>
               </div>
-              <div className="w-3/12">
-                { item?.card?.info?.imageId && <img
+              <div className="w-3/12 relative">
+                {item?.card?.info?.imageId && <img
                   src={ MenuItemImageURL + item?.card?.info?.imageId }
                   alt={item?.card?.info?.name}
                   className="w-9/12 h-25 ml-8 rounded-lg object-cover"
                 ></img>}
+                <button className="text-green-600 bg-gray-100 px-2 py-1 rounded-lg ml-14 cursor-pointer absolute bottom-1 hover:bg-black hover:text-white ">
+                    Add +
+                </button>
               </div>
             </div>
           );

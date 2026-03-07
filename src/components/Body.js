@@ -38,14 +38,14 @@ const Body = () => {
         <button onClick={() => {
             setResList(restaurants.filter( res => res.info.name.toLowerCase().includes(searchText.toLowerCase())));
           }}
-          className="px-3 bg-gray-200 rounded-md">
+          className="px-3 bg-gray-200 rounded-md cursor-pointer">
           Search
         </button>
         <button
           onClick={() => {
             setResList(restaurants.filter( restaurant => restaurant.info.avgRating >= 4.5));
           }}
-          className="px-3 bg-gray-200 rounded-md">
+          className="px-3 bg-gray-200 rounded-md cursor-pointer">
           Top Rated Restaurants
         </button>
         <button 
@@ -53,7 +53,7 @@ const Body = () => {
             setResList(restaurants);
             setSearchText("");
           }}
-          className="px-3 bg-gray-200 rounded-md">
+          className="px-3 bg-gray-200 rounded-md cursor-pointer">
           Remove Filter
         </button>
       </div>
