@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { restaurantsMenu } from "../utils/restaurantsMenu";
 import { useParams } from "react-router-dom";
-import MenuCategoryList from "./MenuCategoryList";
+import MenuItemCategory from "./MenuItemCategory";
 
 const RestaurantMenuCard = () => {
-  const [showContent, setShowContent] = useState(false);
   const { resId } = useParams();
 
   const resObj = "res" + resId;
@@ -14,23 +13,14 @@ const RestaurantMenuCard = () => {
   const { name, id, avgRating, cuisines, sla, totalRatings } =
     menu.data?.cards[2]?.card?.card?.info;
 
-  const card =
-    menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card
-      ?.card;
-  
-  let title;
-  let itemCards;
-  if(card?.itemCards) {
-    title = card?.title;
-    itemCards = card?.itemCards;
-  } else {
-    title = card?.categories[0]?.title;
-    itemCards = card?.categories[0]?.itemCards;
-  }
+  const nonFilteredCards =
+    menu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
 
-  const handleClick = () => {
-    setShowContent(!showContent);
-  };
+  const cards = nonFilteredCards.filter(
+    (card) =>
+      card?.card?.card?.["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+  );
 
   return (
     <div className="flex flex-col items-center my-5">
@@ -42,40 +32,16 @@ const RestaurantMenuCard = () => {
       <h3 className="mt-2">{sla.deliveryTime} minutes</h3>
       <h2 className="my-5 font-medium text-2xl">Menu</h2>
 
-
-      <div className="w-6/12 bg-gray-100 p-4 border-b-12 border-gray-200 ">
-        <div
-          className="flex justify-between cursor-pointer"
-          onClick={handleClick}
-        >
-          <p className="font-medium">{title}</p>
-          <div>
-            {showContent ? (
-            // Up Arrow
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeWidth="2" d="M5 15l7-7 7 7" />
-            </svg>
-          ) : (
-            // Down Arrow
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          )}
-          </div>
+      <div className="w-6/12 flex flex-col gap-4">
+        <div>
+          {cards.map((card) => {
+            return (
+              <div key={card?.card?.card?.title}>
+                <MenuItemCategory card={card}/>
+              </div>
+            );
+          })}
         </div>
-        {showContent && <MenuCategoryList itemCards={itemCards} />}
       </div>
     </div>
   );
