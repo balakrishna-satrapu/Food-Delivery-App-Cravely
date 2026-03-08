@@ -1,8 +1,10 @@
 import { MenuItemImageURL } from "../utils/constants";
+import { addItem } from "../utils/cartStore";
+import { useDispatch } from "react-redux";
 
 const MenuCategoryList = (props) => {
     const { itemCards } = props;
-    
+    const dispatch = useDispatch();
     return (
         <div className="">
         {itemCards.map((item) => {
@@ -22,7 +24,12 @@ const MenuCategoryList = (props) => {
                   alt={item?.card?.info?.name}
                   className="w-9/12 h-25 ml-8 rounded-lg object-cover"
                 ></img>}
-                <button className="text-green-600 bg-gray-100 px-2 py-1 rounded-lg ml-14 cursor-pointer absolute bottom-1 hover:bg-black hover:text-white ">
+                <button 
+                  className="text-green-600 bg-gray-100 px-2 py-1 rounded-lg ml-14 cursor-pointer absolute bottom-1 hover:bg-black hover:text-white "
+                  onClick={() => {
+                    dispatch(addItem(item));
+                  }}
+                  >
                     Add +
                 </button>
               </div>
