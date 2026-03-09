@@ -10,6 +10,7 @@ import RestaurantMenuCard from "./components/RestaurantMenuCard";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <div id="app-container">
         <Header />
         <Outlet />
+        <Footer />
       </div>
     </Provider>
   );
